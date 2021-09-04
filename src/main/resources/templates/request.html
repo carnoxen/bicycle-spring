@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<div th:replace="includes :: header"></div>
+		<main>
+			<h1>요청 목록</h1>
+			<details th:each="request : ${requests}">
+				<summary th:text="${request.reqid}"></summary>
+				<p th:text="|등록 날짜: ${request.createdAt}, 종류: ${request.kind}|"></p>
+				<article th:each="image : ${__${request.reqid}__}">
+					<img th:src="@{|/upload/${image.uuid}.png|}" alt="bicycle" />
+				</article>
+				<p th:switch="${request.accepted}">승인 여부: 
+					<span th:case="0">대기 중</span>
+					<span th:case="1">거부</span>
+					<span th:case="*">승인됨</span>
+				</p>
+			</details>
+			<p th:if="${#lists.isEmpty(requests)}">아직 등록을 요청하지 않았습니다. <a href="/register_bicycle">추가하시겠습니까?</a></p>
+		</main>
+	</body>
+</html>

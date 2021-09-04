@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<header th:fragment="header">
+			<a href="/">home</a>
+			<th:block th:if="${you}">
+				<nav>
+					<ul>
+						<li><a th:href="@{|/member/${you.username}|}">your home page</a></li>
+						<li><a th:href="@{/request}">your requests</a></li>
+						<li><a th:href="@{/register_bicycle}">register your bicycle</a></li>
+						<li><form th:action="@{/logout}" method="post"><input type="submit" value="logout" /></form></li>
+					</ul>
+				</nav>
+			</th:block>
+			<th:block th:unless="${you}">
+				<nav>
+					<ul>
+						<li><a th:href="@{/login}">login</a></li>
+						<li><a th:href="@{/signup}">sign up</a></li>
+					</ul>
+				</nav>
+			</th:block>
+		</header>
+	</body>
+</html>

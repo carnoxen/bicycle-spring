@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<style>
+			select:invalid {
+				color: gray;
+			}
+			
+			select:invalid * {
+				color: black;
+			}
+		</style>
+	</head>
+	<body>
+		<form method="post" th:action="@{/signup}" id="signupForm">
+			<p><label>id: <input type="text" name="username" /></label></p>
+			<p><label>email: <input type="email" name="email" /></label></p>
+			<p><label>password: <input type="password" /></label></p>
+			<p><label>password confirm: <input type="password" name="password" /></label></p>
+			<p><label>state: 
+				<select name="state" id="state" required="required">
+					<option value="" selected="selected" hidden="hidden" disabled="disabled">광역자치단체를 선택해주세요.</option>
+					<optgroup label="특별시, 광역시, 특별자치시">
+						<option value="A">서울특별시</option>
+						<option value="B">부산광역시</option>
+						<option value="C">대구광역시</option>
+						<option value="D">인천광역시</option>
+						<option value="E">광주광역시</option>
+						<option value="F">대전광역시</option>
+						<option value="G">울산광역시</option>
+						<option value="H">세종특별자치시</option>
+					</optgroup>
+					<optgroup label="도, 특별자치도">
+						<option value="I">경기도</option>
+						<option value="J">강원도</option>
+						<option value="K">충청북도</option>
+						<option value="L">충청남도</option>
+						<option value="M">전라북도</option>
+						<option value="N">전라남도</option>
+						<option value="O">경상북도</option>
+						<option value="P">경상남도</option>
+						<option value="Q">제주특별자치도</option>
+					</optgroup>
+				</select></label>
+			</p>
+			<p><label>county: 
+				<select name="county" id="county" required="required">
+					<option value="" selected="selected" hidden="hidden" disabled="disabled">기초자치단체를 선택해주세요.</option>
+					<optgroup label="기초구역" id="county_group">
+					</optgroup>
+				</select></label>
+			</p>
+			<p><input type="submit" value="signup" /></p>
+		</form>
+		<script th:src="@{/js/select_county.js}" type="module"></script>
+	</body>
+</html>

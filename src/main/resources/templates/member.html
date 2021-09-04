@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org/">
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<div th:replace="includes :: header"></div>
+		<main>
+			<h1 th:text="|${username}의 자전거 목록|"></h1>
+			<details th:each="bicycle : ${bicycles}">
+				<summary th:text="${bicycle.serial}"></summary>
+				<p th:text="|등록 날짜: ${bicycle.registeredAt}, 종류: ${bicycle.kind}, 분실 여부: ${bicycle.lost}|"></p>
+				<article th:each="image : ${__${bicycle.serial}__}">
+					<img th:src="@{|/upload/${image.uuid}.png|}" alt="bicycle" />
+				</article>
+			</details>
+			<p th:if="${#lists.isEmpty(bicycles)}">등록한 자전거가 없습니다</p>
+		</main>
+	</body>
+</html>
